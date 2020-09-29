@@ -1,65 +1,137 @@
 import React from 'react';
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import gameTable from './gameTable.js';
 
 
-function App() {
+class App extends React.Component {
 
-    const [sg, setGame] = useState('');
-    const [su, setUser] = useState('');
-
-    function btPress() {//sample code for testing purposes
-
-        if ((sg == '') && (su == '')) {
-            alert("Displaying all queries");
-        }
-        else if ((sg != '') && (su == '')) {
-            alert("Search results for " + sg + "; All users");
-        }
-        else if ((sg == '') && (su != '')) {
-            alert("Search results for User: " + su);
-        }
-        else {
-            alert("Search results for " + sg + "; User: " + su);
-        }
-        //setGame(''); setUser('');
-
-         //displaying results and clear the text inputs is where I'm stuck with React    
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: false,
+            su: '', sg: '',
+            searchg: '',
+            searchn: '',
+            i: 0,
+        };
     }
-  return (
-  	
-    <div className="App">
-          <div className= "App-header" >
-          
-              <h1> GAME CHASERS!</h1>
-              <h2>Region: NA</h2>
+    componentDidMount = async () => {
+        this.setState({ loaded: true })
+    }
+    
+    userChange = (uc) => this.setState({
+        su: uc.target.value 
+    })
+    gameChange = (gc) => this.setState({
+        sg: gc.target.value
+    })
 
-          </div>{/*End of header*/}
+    
+    searchPress = (sp) => {
+        if (((this.state.sg == undefined) || (this.state.sg == '')) && ((this.state.su == undefined) || (this.state.su == ''))) {
+            this.setState({i: 0 });
+    }
+        else if ((this.state.sg != '') && ((this.state.su == '')||(this.state.su==undefined))) {
+            
+            this.setState({ i: 1});
+            this.setState({searchg: this.state.sg});
+    }
+        else if ((this.state.sg == '') && (this.state.su != '')) {
+            
+            this.setState({ searchn: this.state.su });
+            this.setState({ i: 2 });
+    }
+    else { 
+            this.setState({ i: 3 });
+            this.setState({ searchg: this.state.sg });
+            this.setState({ searchn: this.state.su });
+    }
+    }
 
-          <div className="App-searchbar">
-             
-              Search by game-
-            <input type="resetText" onChange={ge => setGame(ge.target.value)} />
+    render() {
+        
+
+        let filteredTable = this.props.tableInfo.filter(
+            (items) => {
+                if (this.state.i == 0) {
+                    return items;
+                }
+                else if (this.state.i == 1) {
+                    return items.Game.toLowerCase().indexOf(this.state.searchg.toLowerCase()) !== -1
+                }
+
+                else if (this.state.i == 2) {
+                    return items.Name.toLowerCase().indexOf(this.state.searchn.toLowerCase()) !==-1
+                }
+
+                else if (this.state.i == 3) {
+                    while ((items.Game.toLowerCase().indexOf(this.state.searchg.toLowerCase()) !== -1) &&
+                        (items.Name.toLowerCase().indexOf(this.state.searchn.toLowerCase()) !== -1)) {
+                            return items;
+                    }
+
+                     
+                }
+            }
+        );
+
+        const items = filteredTable;
+        
+        const itemList = items.map((items, index) =>
+
+            <tr key={index}>
+                <td>{items.Game.toString()}</td>
+                <td>{items.Name.toString()}</td>
+                <td>{items.Size.toString()}</td>
+                <td>{items.Time.toString()}</td>
+                <td>{items.Notes.toString()}</td>
+            </tr>
+        );
+
+        return (
+            <div className="App">
+                <div className="App-header" >
+
+                    <h1 style={{ display: "inline", alignItems: "center" }}> GAME CHASERS!</h1>
+
+
+                    <label style={{ display: "inline", float: "right" }}>Region: NA</label>
+
+                </div>{/*End of header*/}
+
+                <div className="App-searchbar">
+
+                    <a >Search by game</a>
+                    <input type="text" value={this.state.sg} onChange={this.gameChange} />
               &emsp;
-            Search by user- 
-            <input type="text" onChange={gc => setUser(gc.target.value)} />
+            <a >Search by user</a>
+                    <input type="text" value={this.state.su} onChange={this.userChange} />
               &emsp;
-            <Button variant="secondary" size="lg" onClick={btPress} > Search </Button>{''}
-          </div> {/* End of searchbar */}
+            <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
 
-          <div className="App-table" >
-              <gameTable />
-              
-              
-        </div>
-          
-        </div> /* End of App*/
-  );
+                </div> 
+
+                <div className="App-table">
+                    <table style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse" }} >
+                        <tr>
+                            <th>Game</th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Time</th>
+                            <th>Notes</th>
+                        </tr>
+                        {this.state.loaded ?
+                            <React.Fragment >
+                                {itemList}
+                            </React.Fragment>
+                            : <div></div>
+                        }
+                    </table>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
