@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import Login from './Login.js';
 import Home from './Home.js';
@@ -12,10 +12,6 @@ import Registration from './Registration.js';
 function btPress() {
     alert('Code to do here!');
 }
-
-
-
-
 
 class App extends React.Component{
 
@@ -45,33 +41,16 @@ class App extends React.Component{
 
     <div className="App">
     <Router>
+          <Link to="/login">Login </Link>
+          <Link to="/home">Home </Link>
+          <Link to="/table">Table</Link>
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
         <Route path="/home" component={Home} />
-        <Route path="/" component={Home} />
+        <Route path="/table" render={(props) => <Table {...props} title={`Table Time`} itemList={itemList}/>} />
       </Switch>
     </Router>
-
-        <div className="Home-table">
-          <table style={{width:"100%",border: "1px solid black",borderCollapse: "collapse"}} >
-              <tr>
-                <th>Game</th>
-                <th>Name</th>
-                <th>Size</th>
-                <th>Time</th>
-                <th>Notes</th>
-              </tr>
-              {this.state.loaded ?
-              <React.Fragment>
-                  {itemList}
-                  </React.Fragment>
-                :<div></div>
-                }
-          </table>
-        </div>
-
-
 
 
     </div>
@@ -79,6 +58,34 @@ class App extends React.Component{
 }
 
 }
+
+const Table = ({ title, itemList }) => {
+  return (
+    <>
+    <div>
+    <h1>{title}</h1>
+    </div>
+
+    <div className="Home-table">
+      <table style={{width:"100%",border: "1px solid black",borderCollapse: "collapse"}} >
+          <tr>
+            <th>Game</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Time</th>
+            <th>Notes</th>
+          </tr>
+
+          <React.Fragment>
+              {itemList}
+              </React.Fragment>
+
+
+      </table>
+    </div>
+    </>
+  );
+};
 
 
 

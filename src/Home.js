@@ -56,23 +56,7 @@ class Home extends React.Component{
             <Button variant="secondary" size="lg" onClick={btPress} > Search </Button>{''}
           </div> {/* End of searchbar */}
 
-          <div className="Home-table">
-            <table style={{width:"100%",border: "1px solid black",borderCollapse: "collapse"}} >
-                <tr>
-                  <th>Game</th>
-                  <th>Name</th>
-                  <th>Size</th>
-                  <th>Time</th>
-                  <th>Notes</th>
-                </tr>
-                {this.state.loaded ?
-                <React.Fragment>
-                    {this.itemList}
-                    </React.Fragment>
-                  :<div></div>
-                  }
-            </table>
-          </div>
+
 
     </div>
   );
