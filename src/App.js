@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import GetRegion from "./Component/getRegion";
 import DropDown from './Component/dropDown';
 
 function btPress() {
