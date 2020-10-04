@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
 import Login from './Login.js';
 import Home from './Home.js';
@@ -40,15 +41,42 @@ class App extends React.Component{
   return (
 
     <div className="App">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand href="home">Game Chasers</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="about">About</Nav.Link>
+          <NavDropdown title="Region" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="3.1">NA</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="3.2">SA</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="3.3">Asia</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="3.4">EU</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        <Nav>
+          <Nav.Link eventKey={2} href="login">
+            Login
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+
+
+
+
+
+
     <Router>
-          <Link to="/login">Login </Link>
-          <Link to="/home">Home </Link>
-          <Link to="/table">Table</Link>
+
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Route path="/home" component={Home} />
-        <Route path="/table" render={(props) => <Table {...props} title={`Table Time`} itemList={itemList}/>} />
+        <Route path="/home" render={(props) => <Table {...props} itemList={itemList}/>} />
+        <Route path="/" component={Home} />
       </Switch>
     </Router>
 
@@ -59,12 +87,23 @@ class App extends React.Component{
 
 }
 
-const Table = ({ title, itemList }) => {
+const Table = ({ itemList }) => {
   return (
     <>
-    <div>
-    <h1>{title}</h1>
-    </div>
+
+
+
+
+    <div className="Home-searchbar">
+
+      <a >Search by game</a>
+      <input type="text" />
+        &emsp;
+      <a >Search by user</a>
+      <input type="text" />
+        &emsp;
+      <Button variant="secondary" size="lg" onClick={btPress} > Search </Button>{''}
+    </div> {/* End of searchbar */}
 
     <div className="Home-table">
       <table style={{width:"100%",border: "1px solid black",borderCollapse: "collapse"}} >
