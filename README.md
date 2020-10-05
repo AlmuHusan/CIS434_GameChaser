@@ -12,6 +12,8 @@ In the project directory, you can run:
 
 Installs the nessecary packages needed to run the react program
 
+for the button: 'npm install react-bootstrap bootstrap'
+
 ### `npm start`
 
 Runs the app in the development mode.<br />

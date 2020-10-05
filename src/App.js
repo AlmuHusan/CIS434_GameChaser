@@ -2,6 +2,8 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import GetRegion from './components/getRegion';
+
 
 
 class App extends React.Component {
@@ -28,7 +30,11 @@ class App extends React.Component {
         gameSearchText: gc.target.value
     })
 
+function btPress() {
+    alert('Code to do here!');
+}
     
+
     searchPress = (sp) => {
         if (((this.state.gameSearchText == undefined) || (this.state.gameSearchText == '')) && ((this.state.userSearchText == undefined) || (this.state.userSearchText == ''))) {
             this.setState({ searchIndex: 0 });
@@ -108,6 +114,7 @@ class App extends React.Component {
             <a >Search by user</a>
                     <input type="text" value={this.state.su} onChange={this.userChange} />
               &emsp;
+
             <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
 
                 </div> 
@@ -135,3 +142,4 @@ class App extends React.Component {
 }
 
 export default App;
+
