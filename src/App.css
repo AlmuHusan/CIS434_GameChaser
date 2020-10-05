@@ -29,15 +29,23 @@
     min-height: 5vh;
     align-items: center;
     justify-content: center;
+    background-color:lightsteelblue;
 }
 
 .App-table {
-    padding: 1rem;
-    min-height: 50vh;
+    
     display: flex;
 }
+
+.App-results{
+    padding: 1rem;
+    min-height: 100vh;
+    background-color: darkslategray;
+    text-align:left;
+    color: whitesmoke;
+}
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
