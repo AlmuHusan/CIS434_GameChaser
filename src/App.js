@@ -30,9 +30,7 @@ class App extends React.Component {
         gameSearchText: gc.target.value
     })
 
-function btPress() {
-    alert('Code to do here!');
-}
+    
     
 
     searchPress = (sp) => {
