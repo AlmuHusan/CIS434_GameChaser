@@ -10,10 +10,11 @@ class App extends React.Component {
         super(props);
         this.state = {
             loaded: false,
-            su: '', sg: '',
-            searchg: '',
-            searchn: '',
-            i: 0,
+
+            /*having 2 sets of these prevents typing in the text boxes from doing weird stuff, and makes
+            the search button function properly*/
+            userSearchText: '', userSearchActual: '', gameSearchText: '', gameSearchActual: '',
+            searchIndex: 0,
         };
     }
     componentDidMount = async () => {
@@ -21,31 +22,31 @@ class App extends React.Component {
     }
     
     userChange = (uc) => this.setState({
-        su: uc.target.value 
+        userSearchText: uc.target.value 
     })
     gameChange = (gc) => this.setState({
-        sg: gc.target.value
+        gameSearchText: gc.target.value
     })
 
     
     searchPress = (sp) => {
-        if (((this.state.sg == undefined) || (this.state.sg == '')) && ((this.state.su == undefined) || (this.state.su == ''))) {
-            this.setState({i: 0 });
+        if (((this.state.gameSearchText == undefined) || (this.state.gameSearchText == '')) && ((this.state.userSearchText == undefined) || (this.state.userSearchText == ''))) {
+            this.setState({ searchIndex: 0 });
     }
-        else if ((this.state.sg != '') && ((this.state.su == '')||(this.state.su==undefined))) {
+        else if ((this.state.gameSearchText != '') && ((this.state.userSearchText == '') || (this.state.userSearchText==undefined))) {
             
-            this.setState({ i: 1});
-            this.setState({searchg: this.state.sg});
+            this.setState({ searchIndex: 1});
+            this.setState({ gameSearchActual: this.state.gameSearchText});
     }
-        else if ((this.state.sg == '') && (this.state.su != '')) {
+        else if ((this.state.gameSearchText == '') && (this.state.userSearchText != '')) {
             
-            this.setState({ searchn: this.state.su });
-            this.setState({ i: 2 });
+            this.setState({ userSearchActual: this.state.userSearchText });
+            this.setState({ searchIndex: 2 });
     }
     else { 
-            this.setState({ i: 3 });
-            this.setState({ searchg: this.state.sg });
-            this.setState({ searchn: this.state.su });
+            this.setState({ searchIndex: 3 });
+            this.setState({ gameSearchActual: this.state.gameSearchText });
+            this.setState({ userSearchActual: this.state.userSearchText });
     }
     }
 
@@ -54,20 +55,20 @@ class App extends React.Component {
 
         let filteredTable = this.props.tableInfo.filter(
             (items) => {
-                if (this.state.i == 0) {
+                if (this.state.searchIndex == 0) {
                     return items;
                 }
-                else if (this.state.i == 1) {
-                    return items.Game.toLowerCase().indexOf(this.state.searchg.toLowerCase()) !== -1
+                else if (this.state.searchIndex == 1) {
+                    return items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
                 }
 
-                else if (this.state.i == 2) {
-                    return items.Name.toLowerCase().indexOf(this.state.searchn.toLowerCase()) !==-1
+                else if (this.state.searchIndex == 2) {
+                    return items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !==-1
                 }
 
-                else if (this.state.i == 3) {
-                    while ((items.Game.toLowerCase().indexOf(this.state.searchg.toLowerCase()) !== -1) &&
-                        (items.Name.toLowerCase().indexOf(this.state.searchn.toLowerCase()) !== -1)) {
+                else if (this.state.searchIndex == 3) {
+                    while ((items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
+                        (items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
                             return items;
                     }
 
@@ -94,7 +95,6 @@ class App extends React.Component {
                 <div className="App-header" >
 
                     <h1 style={{ display: "inline", alignItems: "center" }}> GAME CHASERS!</h1>
-
 
                     <label style={{ display: "inline", float: "right" }}>Region: NA</label>
 
