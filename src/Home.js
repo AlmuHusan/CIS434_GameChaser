@@ -24,41 +24,75 @@ function log() {
 class Home extends React.Component{
 
   constructor(props) {
-    super(props);
-    this.state = {loaded: false};
-  }
-  componentDidMount= async()=>{
-    this.setState({loaded:true})
-}
+          super(props);
+          this.state = {
+              loaded: false,
+
+              /*having 2 sets of these prevents typing in the text boxes from doing weird stuff, and makes
+              the search button function properly*/
+              userSearchText: '', userSearchActual: '', gameSearchText: '', gameSearchActual: '',
+              searchIndex: 0,
+          };
+
+
+      }
+      componentDidMount = async () => {
+          this.setState({ loaded: true })
+      }
+
+      userChange = (uc) => this.setState({
+          userSearchText: uc.target.value
+      })
+      gameChange = (gc) => this.setState({
+          gameSearchText: gc.target.value
+      })
+
+
+
+
+      searchPress = (sp) => {
+          if (((this.state.gameSearchText == undefined) || (this.state.gameSearchText == '')) && ((this.state.userSearchText == undefined) || (this.state.userSearchText == ''))) {
+              this.setState({ searchIndex: 0 });
+      }
+          else if ((this.state.gameSearchText != '') && ((this.state.userSearchText == '') || (this.state.userSearchText==undefined))) {
+
+              this.setState({ searchIndex: 1});
+              this.setState({ gameSearchActual: this.state.gameSearchText});
+      }
+          else if ((this.state.gameSearchText == '') && (this.state.userSearchText != '')) {
+
+              this.setState({ userSearchActual: this.state.userSearchText });
+              this.setState({ searchIndex: 2 });
+      }
+      else {
+              this.setState({ searchIndex: 3 });
+              this.setState({ gameSearchActual: this.state.gameSearchText });
+              this.setState({ userSearchActual: this.state.userSearchText });
+      }
+      }
+
+
+
   render(){
+
+
 
 
   return (
 
-    <div className="Home">
-          <div className= "Home-header" >
-
-                <h1 style={{display:"inline", alignItems:"center"}}> GAME CHASERS!</h1>
-
-                <Button style={{ alignItems:"right"}} variant="secondary" size="sm" onClick={log} > Login </Button>{''}
-           <label style={{ display: "inline", float: "right" }}>Region: NA</label>
-
-          </div>{/*End of header*/}
-
-          <div className="Home-searchbar">
+    <div className="App-searchbar">
 
             <a >Search by game</a>
-            <input type="text" />
-              &emsp;
-            <a >Search by user</a>
-            <input type="text" />
-              &emsp;
-            <Button variant="secondary" size="lg" onClick={btPress} > Search </Button>{''}
-          </div> {/* End of searchbar */}
+            <input type="text" value={this.state.sg} onChange={this.gameChange} />
+      &emsp;
+    <a >Search by user</a>
+            <input type="text" value={this.state.su} onChange={this.userChange} />
+      &emsp;
 
+    <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
 
+        </div>
 
-    </div>
   );
 }
 }

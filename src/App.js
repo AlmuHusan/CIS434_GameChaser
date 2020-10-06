@@ -9,22 +9,88 @@ import Login from './Login.js';
 import Home from './Home.js';
 import Blank from './blank.js';
 import Registration from './Registration.js';
+import GetRegion from './components/getRegion';
 
-function btPress() {
-    alert('Code to do here!');
-}
+
 
 class App extends React.Component{
 
   constructor(props) {
-    super(props);
-    this.state = {loaded: false};
-  }
-  componentDidMount= async()=>{
-    this.setState({loaded:true})
-}
+          super(props);
+          this.state = {
+              loaded: false,
+
+              /*having 2 sets of these prevents typing in the text boxes from doing weird stuff, and makes
+              the search button function properly*/
+              userSearchText: '', userSearchActual: '', gameSearchText: '', gameSearchActual: '',
+              searchIndex: 0,
+          };
+
+
+      }
+      componentDidMount = async () => {
+          this.setState({ loaded: true })
+      }
+
+      userChange = (uc) => this.setState({
+          userSearchText: uc.target.value
+      })
+      gameChange = (gc) => this.setState({
+          gameSearchText: gc.target.value
+      })
+
+
+
+
+      searchPress = (sp) => {
+          if (((this.state.gameSearchText == undefined) || (this.state.gameSearchText == '')) && ((this.state.userSearchText == undefined) || (this.state.userSearchText == ''))) {
+              this.setState({ searchIndex: 0 });
+      }
+          else if ((this.state.gameSearchText != '') && ((this.state.userSearchText == '') || (this.state.userSearchText==undefined))) {
+
+              this.setState({ searchIndex: 1});
+              this.setState({ gameSearchActual: this.state.gameSearchText});
+      }
+          else if ((this.state.gameSearchText == '') && (this.state.userSearchText != '')) {
+
+              this.setState({ userSearchActual: this.state.userSearchText });
+              this.setState({ searchIndex: 2 });
+      }
+      else {
+              this.setState({ searchIndex: 3 });
+              this.setState({ gameSearchActual: this.state.gameSearchText });
+              this.setState({ userSearchActual: this.state.userSearchText });
+      }
+      }
+
+
+
   render(){
-    const items = this.props.tableInfo;
+    let filteredTable = this.props.tableInfo.filter(
+            (items) => {
+                if (this.state.searchIndex == 0) {
+                    return items;
+                }
+                else if (this.state.searchIndex == 1) {
+                    return items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
+                }
+
+                else if (this.state.searchIndex == 2) {
+                    return items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !==-1
+                }
+
+                else if (this.state.searchIndex == 3) {
+                    while ((items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
+                        (items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
+                            return items;
+                    }
+
+
+                }
+            }
+        );
+
+        const items = filteredTable;
 
     const itemList = items.map((items,index) =>
 
@@ -46,7 +112,7 @@ class App extends React.Component{
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="about">About</Nav.Link>
+          <Nav.Link href="/">About</Nav.Link>
           <NavDropdown title="Region" id="collasible-nav-dropdown">
             <NavDropdown.Item href="3.1">NA</NavDropdown.Item>
             <NavDropdown.Divider />
@@ -83,6 +149,7 @@ class App extends React.Component{
 
     </div>
   );
+
 }
 
 }
@@ -91,19 +158,6 @@ const Table = ({ itemList }) => {
   return (
     <>
 
-
-
-
-    <div className="Home-searchbar">
-
-      <a >Search by game</a>
-      <input type="text" />
-        &emsp;
-      <a >Search by user</a>
-      <input type="text" />
-        &emsp;
-      <Button variant="secondary" size="lg" onClick={btPress} > Search </Button>{''}
-    </div> {/* End of searchbar */}
 
     <div className="Home-table">
       <table style={{width:"100%",border: "1px solid black",borderCollapse: "collapse"}} >
