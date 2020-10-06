@@ -133,7 +133,18 @@ class App extends React.Component{
 
 
 
+    <div className="App-searchbar">
 
+            <a >Search by game</a>
+            <input type="text" value={this.state.sg} onChange={this.gameChange} />
+      &emsp;
+    <a >Search by user</a>
+            <input type="text" value={this.state.su} onChange={this.userChange} />
+      &emsp;
+
+    <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
+
+        </div>
 
 
     <Router>
