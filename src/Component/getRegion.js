@@ -8,6 +8,7 @@ export default class getRegion extends React.Component{
       };
     
       async componentDidMount() {
+        alert("This website is using your location to select server")
         const url = "https://geo.ipify.org/api/v1?apiKey=at_gFewbGeplb0gcg0S6HynNZZA5N6gk&ipAddress=";
         const response = await fetch(url);
         const data = await response.json();
@@ -15,6 +16,7 @@ export default class getRegion extends React.Component{
       }
     
       render() {
+        
         if (this.state.loading) {
           return <div>loading...  </div>;
         }
@@ -29,6 +31,12 @@ export default class getRegion extends React.Component{
         }
         if(this.state.timezone == "-07:00" || "-06:00"){
             return <div>West Coast  </div>
+        }
+        if(this.state.timezone == "+01:00" || "+02:00"){
+          return <div>Europe  </div>
+        }
+        if(this.state.timezone == "+08:00" || "+09:00" || "+07:00"){
+          return <div>West Coast  </div>
         }
       }
 }
