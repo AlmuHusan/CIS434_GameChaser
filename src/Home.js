@@ -79,7 +79,7 @@ class Home extends React.Component{
 
 
   return (
-
+<>
     <div className="App-searchbar">
 
             <a >Search by game</a>
@@ -92,6 +92,11 @@ class Home extends React.Component{
     <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
 
         </div>
+
+
+
+
+</>
 
   );
 }

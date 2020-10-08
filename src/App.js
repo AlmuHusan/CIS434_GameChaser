@@ -103,6 +103,29 @@ class App extends React.Component{
   </tr>);
 
 
+  const Search = ({  }) => {
+
+    return (
+  <>
+      <div className="App-searchbar">
+
+              <a >Search by game</a>
+              <input type="text" value={this.state.sg} onChange={this.gameChange} />
+
+              <a >Search by user</a>
+              <input type="text" value={this.state.su} onChange={this.userChange} />
+
+      <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
+
+          </div>
+
+
+
+
+  </>
+
+    );
+  };
 
   return (
 
@@ -133,18 +156,7 @@ class App extends React.Component{
 
 
 
-    <div className="App-searchbar">
 
-            <a >Search by game</a>
-            <input type="text" value={this.state.sg} onChange={this.gameChange} />
-      &emsp;
-    <a >Search by user</a>
-            <input type="text" value={this.state.su} onChange={this.userChange} />
-      &emsp;
-
-    <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
-
-        </div>
 
 
     <Router>
@@ -152,8 +164,10 @@ class App extends React.Component{
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Route path="/home" render={(props) => <Table {...props} itemList={itemList}/>} />
-        <Route path="/" component={Home} />
+        <Route exact path="/home" render={(props) => <Search {...props} />} />
+      </Switch>
+      <Switch>
+        <Route exact path="/home" render={(props) => <Table {...props} itemList={itemList}/>} />
       </Switch>
     </Router>
 
@@ -190,6 +204,9 @@ const Table = ({ itemList }) => {
     </>
   );
 };
+
+
+
 
 
 
