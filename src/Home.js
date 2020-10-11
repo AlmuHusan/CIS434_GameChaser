@@ -10,20 +10,13 @@ import App from './App';
 
 
 
-function btPress() {
-    alert('Code to do here!');
-}
-
-
-function log() {
-
-}
 
 
 
 class Home extends React.Component{
 
-  constructor(props) {
+
+      constructor(props) {
           super(props);
           this.state = {
               loaded: false,
@@ -33,8 +26,6 @@ class Home extends React.Component{
               userSearchText: '', userSearchActual: '', gameSearchText: '', gameSearchActual: '',
               searchIndex: 0,
           };
-
-
       }
       componentDidMount = async () => {
           this.setState({ loaded: true })
@@ -71,34 +62,80 @@ class Home extends React.Component{
       }
       }
 
+      render() {
+
+        let filteredTable = this.props.tableInfo.filter(
+                (items) => {
+                    if (this.state.searchIndex == 0) {
+                        return items;
+                    }
+                    else if (this.state.searchIndex == 1) {
+                        return items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
+                    }
+
+                    else if (this.state.searchIndex == 2) {
+                        return items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !==-1
+                    }
+
+                    else if (this.state.searchIndex == 3) {
+                        while ((items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
+                            (items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
+                                return items;
+                        }
 
 
-  render(){
+                    }
+                }
+            );
+
+        const items = filteredTable;
+
+        const itemList = items.map((items,index) =>
+
+        <tr key={index}>
+        <td>{items.Game.toString()}</td>
+        <td>{items.Name.toString()}</td>
+        <td>{items.Size.toString()}</td>
+        <td>{items.Time.toString()}</td>
+        <td>{items.Notes.toString()}</td>
+      </tr>);
+
+          return (
+              <div className="App">
 
 
+                  <div className="App-searchbar">
 
+                      <a >Search by game</a>
+                      <input type="text" value={this.state.sg} onChange={this.gameChange} />
+                &emsp;
+              <a >Search by user</a>
+                      <input type="text" value={this.state.su} onChange={this.userChange} />
+                &emsp;
 
-  return (
-<>
-    <div className="App-searchbar">
+              <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
 
-            <a >Search by game</a>
-            <input type="text" value={this.state.sg} onChange={this.gameChange} />
-      &emsp;
-    <a >Search by user</a>
-            <input type="text" value={this.state.su} onChange={this.userChange} />
-      &emsp;
+                  </div>
 
-    <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
-
-        </div>
-
-
-
-
-</>
-
-  );
-}
+                  <div className="App-table">
+                      <table style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse" }} >
+                          <tr>
+                              <th>Game</th>
+                              <th>Name</th>
+                              <th>Size</th>
+                              <th>Time</th>
+                              <th>Notes</th>
+                          </tr>
+                          {this.state.loaded ?
+                              <React.Fragment >
+                                  {itemList}
+                              </React.Fragment>
+                              : <React.Fragment></React.Fragment>
+                          }
+                      </table>
+                  </div>
+              </div>
+          );
+      }
 }
 export default Home;
