@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import GetRegion from './getRegion';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';

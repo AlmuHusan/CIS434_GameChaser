@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 export default class getRegion extends React.Component{
       state = {
@@ -8,7 +8,7 @@ export default class getRegion extends React.Component{
       };
     
       async componentDidMount() {
-        alert("This website is using your location to select server")
+        
         const url = "https://geo.ipify.org/api/v1?apiKey=at_gFewbGeplb0gcg0S6HynNZZA5N6gk&ipAddress=";
         const response = await fetch(url);
         const data = await response.json();
@@ -21,7 +21,7 @@ export default class getRegion extends React.Component{
           return <div>loading...  </div>;
         }
         if (!this.state.ip) {
-          return <div>didn't get a ip  </div>;
+          return <div>Could not find region</div>;
         }
         if(this.state.timezone == "-04:00"){
             return <div>East Coast  </div>
