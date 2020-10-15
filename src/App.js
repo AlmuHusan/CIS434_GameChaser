@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import DropDown from './Component/dropDown';
+import GetRegion from './Component/getRegion';
 
 function btPress() {
     alert('Code to do here!');
@@ -16,6 +16,7 @@ class App extends React.Component{
     super(props);
     this.state = {
       loaded: false,
+      region: <GetRegion/>,
     };  
   }
   componentDidMount= async()=>{
@@ -34,13 +35,12 @@ class App extends React.Component{
     <td>{items.Notes.toString()}</td>
   </tr>
   );
-
   return (
   	
     <div className="App">
           <div className= "App-header" >
                 <h1 style={{display:"inline", alignItems:"center"}}> GAME CHASERS!</h1>
-                <h1 style={{display:"inline", alignItems:"center"}}><DropDown/></h1> 
+                <h1 style={{display:"inline", alignItems:"center"}}>{this.state.region}</h1> 
                 
 
            
