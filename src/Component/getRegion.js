@@ -8,7 +8,6 @@ export default class getRegion extends React.Component{
       };
     
       async componentDidMount() {
-        alert("This website is using your location to select server")
         const url = "https://geo.ipify.org/api/v1?apiKey=at_gFewbGeplb0gcg0S6HynNZZA5N6gk&ipAddress=";
         const response = await fetch(url);
         const data = await response.json();
