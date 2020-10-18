@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
-import {Dialog, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
+import {Dialog, DialogContent, DialogTitle, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { Button as MuiButton, makeStyles } from "@material-ui/core";
+import {Box, Table} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(0.5)
+        margin: theme.spacing(1),
+        width:200
     },
     label: {
         textTransform: 'none'
@@ -16,11 +18,10 @@ export function MButton(props) {
 
     const { text, size, color, variant, onClick, ...other } = props
     const classes = useStyles();
-
     return (
         <MuiButton
             variant={variant || "contained"}
-            size={size || "large"}
+            size={size || "md"}
             color={color || "primary"}
             onClick={onClick}
             {...other}
@@ -35,31 +36,36 @@ const intV = {
     Name:'',
     Size:'',
     Time:'',
-    Note:'',
+    Notes:'',
 }
 
-const KEYS= {
+const {GameInput} = {
     GameInput: 'GameInput'
 }
 
 export function insertData(data) {
     let gName = getData();
     gName.push(data);
-    localStorage.setItem(KEYS.GameInput, JSON.stringify(gName))
+    localStorage.setItem(GameInput, JSON.stringify(gName))
+}
+
+export function Index() {
+    if (localStorage.getItem(GameInput.Index) == null)
+        localStorage.setItem(GameInput.Index, '0')
+    var id = parseInt(localStorage.getItem(GameInput.Index))
+    localStorage.setItem(GameInput.Index, (++id).toString())
+    return id;
 }
 
 
-export function getData(data) {
-    if (localStorage.getItem(KEYS.GameInput) == null)
-        localStorage.setItem(KEYS.GameInput, JSON.stringify([]))
-    return JSON.parse(localStorage.getItem(KEYS.GameInput));
+export function getData() {
+    if (localStorage.getItem(GameInput) == null)
+        localStorage.setItem(GameInput, JSON.stringify([]))
+    return JSON.parse(localStorage.getItem(GameInput));
 }
 
 
-
-
-
-export default function GAME(){
+export default function PopupForm(){
 
     const [values, setValues] = useState(intV);
     const handleInputChange = e => {
@@ -73,7 +79,12 @@ export default function GAME(){
     const handleSubmit = e =>{
             e.preventDefault()
         insertData(values)
+        resetForm()
         handleClose()
+    }
+
+    const resetForm =()=>{
+        setValues(intV);
     }
 
 
@@ -83,26 +94,29 @@ export default function GAME(){
     };
     const handleClose = () =>{
         setOpen(false);
-    }
+        resetForm()
+    };
+    const [item, setRecords]= useState(getData());
+    const TblContainer = props => (
+        <Table className={classes.table}>
+            {props.children}
+        </Table>
+    )
 
+    const classes = useStyles();
     return(
         <>
-            <MButton
-                text = "Create"
-                size =  "large"
-                onClick = {handleOpen}
-            />
-              <Dialog open={open} maxwidth = "md">
-            <DialogTitle>
-                <div> CREATE A NEW SECTION </div>
-            </DialogTitle>
+             <Button variant="outlined" onClick={handleOpen}>
+       New Section
+      </Button>
+              <Dialog open={open} aria-labelledby="form-dialog-title">
+                  <DialogTitle>CREATE A NEW SECTION</DialogTitle>
 
             <DialogContent>
-                 <form onSubmit={handleSubmit}>
-            <Grid container>
-                <Grid>
+                <Box className={classes.root} onSubmit={handleSubmit}>
+                <Box item xs={12}>
                     <TextField
-                        id ="standard-basic"
+                        id ="standard-size-normal"
                         label = "Game"
                         name= "Game"
                         value={values.Game}
@@ -110,7 +124,8 @@ export default function GAME(){
                     />
                     <div/>
                     <TextField
-                        id ="standard-basic"
+                        id ="standard-size-small"
+                        size = "small"
                         label = "Name"
                         name= "Name"
                         value={values.Name}
@@ -135,17 +150,25 @@ export default function GAME(){
                     <div/>
                     <TextField
                         id ="standard-basic"
-                        label = "Note"
-                        name = "Note"
-                        value={values.Note}
+                        label = "Notes"
+                        name = "Notes"
+                        value={values.Notes}
                         onChange={handleInputChange}
                     />
                     <div/>
-                    <Button onClick={handleSubmit}>Submit</Button>
-                    <Button onClick={handleClose}>Close</Button>
-                </Grid>
-            </Grid>
-        </form>
+                    <div>
+                    <MButton
+                text = "Create"
+                onClick = {handleSubmit}
+            />
+                    <MButton
+                text = "Close"
+                onClick = {handleClose}
+            />
+                    </div>
+                </Box>
+
+        </Box>
 
 
             </DialogContent>
