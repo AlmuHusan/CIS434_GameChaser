@@ -6,14 +6,14 @@ import React from 'react';
         ip : null,
         timezone : null,
       };
-    
+
       async componentDidMount() {
         const url = "https://geo.ipify.org/api/v1?apiKey=at_gFewbGeplb0gcg0S6HynNZZA5N6gk&ipAddress=";
         const response = await fetch(url);
         const data = await response.json();
         this.setState({ ip: data.ip, loading: false, timezone: data.location.timezone});
       }
-    
+
       render() {
         if (this.state.loading) {
           return <div>loading...</div>;
@@ -30,7 +30,8 @@ import React from 'react';
         if(this.state.timezone == "-07:00" || "-06:00"){
             return <div>West Coast</div>
         }
-        
+
+
       }
 }
 export default GetRegion
