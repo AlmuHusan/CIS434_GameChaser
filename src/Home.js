@@ -7,10 +7,17 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login.js';
 import App from './App';
+import Background from './assets/test.gif';
 
 
-
-
+var sectionStyle = {
+  width: "auto",
+  height: "768px",
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundImage: `url(${Background})`
+};
 
 
 class Home extends React.Component{
@@ -102,7 +109,7 @@ class Home extends React.Component{
 
           return (
               <div className="App">
-
+    <section style={ sectionStyle }>
 
                   <div className="App-searchbar">
 
@@ -118,8 +125,8 @@ class Home extends React.Component{
                   </div>
 
                   <div className="App-table">
-                      <table style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse" }} >
-                          <tr>
+                      <table style={{ width: "100%",  borderCollapse: "collapse" }} >
+                          <tr style={{color:"lightgreen", weight: "italic"}}>
                               <th>Game</th>
                               <th>Name</th>
                               <th>Size</th>
@@ -134,6 +141,7 @@ class Home extends React.Component{
                           }
                       </table>
                   </div>
+                  </section>
               </div>
           );
       }

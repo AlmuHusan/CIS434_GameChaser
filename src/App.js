@@ -13,6 +13,10 @@ import GetRegion from './components/getRegion';
 
 
 
+
+
+
+
 class App extends React.Component{
 
   constructor(props) {
@@ -37,6 +41,7 @@ class App extends React.Component{
   return (
 
     <div className="App">
+
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="home">Game Chasers </Navbar.Brand>
       <Navbar.Brand><GetRegion/> </Navbar.Brand>
@@ -72,8 +77,8 @@ class App extends React.Component{
 
     </Router>
 
+ </div>
 
-    </div>
   );
 
 }
