@@ -13,7 +13,7 @@ function btPress() {
 class App extends React.Component{
 
   constructor(props) {
-<<<<<<< HEAD
+
           super(props);
           this.state = {
               loaded: false,
@@ -28,17 +28,6 @@ class App extends React.Component{
       }
 
 
-=======
-    super(props);
-    this.state = {
-      loaded: false,
-      region: <GetRegion/>,
-    };  
-  }
-  componentDidMount= async()=>{
-    this.setState({loaded:true})
-}
->>>>>>> parent of b60c14a... Revert "Revert "Revert "Revert "Merge branch 'master' into Udom""""
   render(){
     const items = this.props.tableInfo;
     
