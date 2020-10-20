@@ -43,12 +43,11 @@ class App extends React.Component{
     <div className="App">
 
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="home">Game Chasers </Navbar.Brand>
+      <Navbar.Brand href="/">Game Chasers </Navbar.Brand>
       <Navbar.Brand><GetRegion/> </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/">About</Nav.Link>
           <NavDropdown title="Region" id="collasible-nav-dropdown">
             <NavDropdown.Item href="3.1">NA</NavDropdown.Item>
             <NavDropdown.Divider />
@@ -72,7 +71,7 @@ class App extends React.Component{
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Route exact path="/home" component={() => <Home  tableInfo={this.props.tableInfo} />} />
+        <Route exact path="/" component={() => <Home  tableInfo={this.props.tableInfo} />} />
       </Switch>
 
     </Router>
