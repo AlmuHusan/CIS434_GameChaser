@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login.js';
 import App from './App';
 import Background from './assets/test.gif';
-
+import PopupForm from './components/PopupForm';
 
 var sectionStyle = {
   width: "auto",
@@ -110,9 +110,9 @@ class Home extends React.Component{
           return (
               <div className="App">
     <section style={ sectionStyle }>
-
+                
                   <div className="App-searchbar">
-
+                  
                       <a >Search by game</a>
                       <input type="text" value={this.state.sg} onChange={this.gameChange} />
                 &emsp;
@@ -123,7 +123,7 @@ class Home extends React.Component{
               <Button variant="secondary" size="lg" onClick={this.searchPress} > Search </Button>{''}
 
                   </div>
-
+                  <div style={{ width: "100%",  borderCollapse: "collapse" }}><PopupForm/></div>
                   <div className="App-table">
                       <table style={{ width: "100%",  borderCollapse: "collapse" }} >
                           <tr style={{color:"lightgreen", weight: "italic"}}>
