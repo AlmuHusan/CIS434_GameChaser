@@ -10,7 +10,7 @@
 .App-background {
   width: auto;
   height: auto;
-  background-image: `url(${./assets/test.gif})`;
+  background-image: url(${./assets/test.gif});
 
 }
 
