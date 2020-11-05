@@ -7,6 +7,13 @@
   pointer-events: none;
 }
 
+.App-background {
+  width: auto;
+  height: auto;
+  background-image: `url(${./assets/test.gif})`;
+
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -29,12 +36,22 @@
     min-height: 5vh;
     align-items: center;
     justify-content: center;
-    background-color:lightsteelblue;
+    font-size: 30px;
+    font-family: Impact, Charcoal, sans-serif;
+    -webkit-text-stroke: 1px black;
+    color: whitesmoke;
+
 }
 
 .App-table {
-    
+
     display: flex;
+    font-size: 25px;
+    color: white;
+    backdrop-filter: blur(1.25px);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke: .9px black;
 }
 
 .App-results{
@@ -46,9 +63,6 @@
 }
 .App-link {
     color: #61dafb;
-}
-.App-ButtonC {
-    float: left;
 }
 
 @keyframes App-logo-spin {

@@ -33,6 +33,10 @@ export default class Login extends Component {
   render(){
     return (
       <div>
+<<<<<<< HEAD
+=======
+      <h1>LOGIN</h1>
+>>>>>>> master
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
