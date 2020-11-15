@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import { render, cleanup } from '@testing-library/react';
 import App from './App';
 import './Home.js';
+import Home from './Home.js';
 afterEach(cleanup);
 it('renders', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Home />, div);
 });
 
 test('renders search button', () => {

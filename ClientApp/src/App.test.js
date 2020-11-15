@@ -28,7 +28,6 @@ test('renders Region dropdown', () => {
     expect(dropdownElement).toBeInTheDocument();
 });
 
-
 test('renders Login', () => {
     const { getByText } = render(<App />);
     const linkElement = getByText('Login');
