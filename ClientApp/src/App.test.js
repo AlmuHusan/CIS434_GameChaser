@@ -1,9 +1,37 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import ReactDOM from 'react-dom';
+import { render, cleanup } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+afterEach(cleanup);
+
+it('renders', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div)
+});
+
+
+test('renders title', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
+  const linkElement = getByText('Game Chasers');
   expect(linkElement).toBeInTheDocument();
 });
+
+test('renders Region dropdown', () => {
+    const { getByText } = render(<App />);
+    const dropdownElement = getByText('Region');
+    expect(dropdownElement).toBeInTheDocument();
+});
+test('renders Region dropdown', () => {
+    const { getByText } = render(<App />);
+    const dropdownElement = getByText('Region');
+    expect(dropdownElement).toBeInTheDocument();
+});
+
+
+test('renders Login', () => {
+    const { getByText } = render(<App />);
+    const linkElement = getByText('Login');
+    expect(linkElement).toBeInTheDocument();
+});
+
