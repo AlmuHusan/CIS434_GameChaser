@@ -21,13 +21,13 @@ import React from 'react';
         if (!this.state.ip) {
           return <div>didn't get a ip</div>;
         }
-        if(this.state.timezone == "-04:00"){
+        if(this.state.timezone == "-05:00"){
             return <div>East Coast</div>
         }
-        if(this.state.timezone == "-05:00"){
+        if(this.state.timezone == "-06:00"){
             return <div>Central</div>
         }
-        if(this.state.timezone == "-07:00" || "-06:00"){
+        if(this.state.timezone == "-07:00" || "-08:00"){
             return <div>West Coast</div>
         }
 
