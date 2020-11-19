@@ -71,7 +71,7 @@ class App extends React.Component{
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Route exact path="/" component={() => <Home  tableInfo={this.props.tableInfo} />} />
+        <Route exact path="/" component={Home} />
       </Switch>
 
     </Router>

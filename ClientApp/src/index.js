@@ -33,7 +33,7 @@ const data = [
 
 ReactDOM.render(
     <React.StrictMode>
-        <App tableInfo={data} />
+        <App />
     </React.StrictMode>,
     document.getElementById('root')
 
