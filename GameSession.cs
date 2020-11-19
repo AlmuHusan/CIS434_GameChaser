@@ -24,5 +24,7 @@ namespace react_asp_template
         [JsonPropertyName("summary")]
         public string Summary { get; set; }
 
+        [JsonPropertyName("timezone")]
+        public string TimeZone { get; set; }
     }
 }

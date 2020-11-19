@@ -34,7 +34,14 @@ class Home extends React.Component{
           };
       }
     async componentDidMount() {
-        const response = await fetch('GameChasers');
+        const response = await fetch('GameChasers/getTableData', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+
+        });
         const data = await response.json();
         console.log(data)
         this.setState({ tableInfo: data, loaded: true });
@@ -82,16 +89,16 @@ class Home extends React.Component{
                           return items;
                       }
                       else if (this.state.searchIndex == 1) {
-                          return items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
+                          return items.game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
                       }
 
                       else if (this.state.searchIndex == 2) {
-                          return items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1
+                          return items.name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1
                       }
 
                       else if (this.state.searchIndex == 3) {
-                          while ((items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
-                              (items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
+                          while ((items.game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
+                              (items.name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
                               return items;
                           }
 
