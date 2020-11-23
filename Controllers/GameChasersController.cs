@@ -29,5 +29,16 @@ namespace react_asp_template.Controllers
             }
             return data;
         }
+
+        [HttpGet("[action]")]
+        public List<Login> getLoginData()
+        {
+            var data2 = new List<Login>();
+            foreach (var line in db.Logins)
+            {
+                data2.Add(line);
+            }
+            return data2;
+        }
     }
 }
