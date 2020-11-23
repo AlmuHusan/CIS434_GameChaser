@@ -21,14 +21,14 @@ import React from 'react';
         if (!this.state.ip) {
           return <div>didn't get a ip</div>;
         }
-        if(this.state.timezone == "-04:00"){
-            return <div>East Coast</div>
+          if (this.state.timezone == "-03:00" || "-04:00" || "-05:00" || "-06:00" || "-07:00" || "-08:00" || "-09:00" || "-10:00") {
+          return <div>NA</div>
         }
-        if(this.state.timezone == "-05:00"){
-            return <div>Central</div>
+          if (this.state.timezone == "+00:00" || "+01:00" || "+02:00" || "+03:00" || "+04:00" || "+05:00" || "+06:00") {
+          return <div>EU</div>
         }
-        if(this.state.timezone == "-07:00" || "-06:00"){
-            return <div>West Coast</div>
+        if (this.state.timezone == "+07:00" || "+08:00" || "+09:00" || "+10:00" || "+11:00" || "+12:00") {
+          return <div>Asia</div>
         }
 
 

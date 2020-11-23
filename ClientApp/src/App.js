@@ -23,7 +23,7 @@ class App extends React.Component{
           super(props);
           this.state = {
               loaded: false,
-
+              region: <GetRegion/>,
 
           };
 
@@ -34,6 +34,7 @@ class App extends React.Component{
       }
 
 
+  handle
   render(){
 
 
@@ -44,18 +45,15 @@ class App extends React.Component{
 
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="/">Game Chasers </Navbar.Brand>
-      <Navbar.Brand><GetRegion/> </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <NavDropdown title="Region" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="3.1">NA</NavDropdown.Item>
+                  <Nav className="mr-auto">
+          <NavDropdown title={this.state.region} id="collasible-nav-dropdown">
+            <NavDropdown.Item onClick={() => this.setState({ region: "NA" })}>NA</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="3.2">SA</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => this.setState({ region: "EU" })}>EU</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="3.3">Asia</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="3.4">EU</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => this.setState({ region: "Asia" })}>Asia</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Nav>

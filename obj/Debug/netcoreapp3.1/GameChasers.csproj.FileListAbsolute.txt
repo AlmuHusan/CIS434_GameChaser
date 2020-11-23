@@ -73,3 +73,4 @@ D:\React\CIS434_GameChaser\obj\Debug\netcoreapp3.1\staticwebassets\GameChasers.S
 D:\React\CIS434_GameChaser\obj\Debug\netcoreapp3.1\GameChasers.dll
 D:\React\CIS434_GameChaser\obj\Debug\netcoreapp3.1\GameChasers.pdb
 D:\React\CIS434_GameChaser\obj\Debug\netcoreapp3.1\GameChasers.genruntimeconfig.cache
+D:\React\CIS434_GameChaser\bin\Debug\netcoreapp3.1\package-lock.json
