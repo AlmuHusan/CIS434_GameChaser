@@ -5,7 +5,7 @@ CREATE TABLE GameSessions (
     Size INTEGER,
 	Time DateTime,
     Summary varchar(255),
-	TimeZone varchar(255),
+	Region varchar(255),
 	PRIMARY KEY (GameSessionId)
 );
 
