@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,8 +31,9 @@ class Home extends React.Component{
               the search button function properly*/
               userSearchText: '', userSearchActual: '', gameSearchText: '', gameSearchActual: '',
               searchIndex: 0,
-          };
-      }
+              search: this.props.rgn,
+              };
+              } 
     async componentDidMount() {
         const response = await fetch('GameChasers');
         const data = await response.json();
@@ -76,46 +77,58 @@ class Home extends React.Component{
     render() {
         var itemList = <tr></tr>;
         if (this.state.loaded) {
-              let filteredTable = this.state.tableInfo.filter(
-                  (items) => {
-                      if (this.state.searchIndex == 0) {
-                          return items;
-                      }
-                      else if (this.state.searchIndex == 1) {
-                          return items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
-                      }
+            let filteredTable = this.state.tableInfo.filter(
+                (items) => {
+                    if (this.state.searchIndex == 0) {
+                        return items;
+                    }
+                    else if (this.state.searchIndex == 1) {
+                        return items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1
+                    }
 
-                      else if (this.state.searchIndex == 2) {
-                          return items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1
-                      }
+                    else if (this.state.searchIndex == 2) {
+                        return items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1
+                    }
 
-                      else if (this.state.searchIndex == 3) {
-                          while ((items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
-                              (items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
-                              return items;
-                          }
-
-
-                      }
-                  }
-              );
+                    else if (this.state.searchIndex == 3) {
+                        while ((items.Game.toLowerCase().indexOf(this.state.gameSearchActual.toLowerCase()) !== -1) &&
+                            (items.Name.toLowerCase().indexOf(this.state.userSearchActual.toLowerCase()) !== -1)) {
+                            return items;
+                        }
 
 
-              const items = filteredTable;
+                    }  
+                }
+            );
+            filteredTable = this.state.tableInfo.filter(
+                (items) => {
+                    if (this.state.search === 'All Region') {
+                        return items;
+                    } else {
+                        return items.region === this.state.search;
+                    }
+                }
+            );
+            
 
-              itemList = items.map((items, index) =>
 
-                  <tr key={index}>
-                      <td>{items.game.toString()}</td>
-                      <td>{items.name.toString()}</td>
-                      <td>{items.size.toString()}</td>
-                      <td>{items.time.toString()}</td>
-                      <td>{items.summary.toString()}</td>
-                  </tr>);
+            const items = filteredTable;
+
+            itemList = items.map((items, index) =>
+                
+                <tr key={index}>
+                        <td>{items.game.toString()}</td>
+                        <td>{items.name.toString()}</td>
+                        <td>{items.size.toString()}</td>
+                        <td>{items.time.toString()}</td>
+                        <td>{items.summary.toString()}</td>
+                    
+                </tr>);
+                
               console.log(itemList);
               
-          }
-              return (
+        }
+        return (
                   <div className="App">
                       <section style={sectionStyle}>
 
@@ -134,7 +147,7 @@ class Home extends React.Component{
                           <div style={{ width: "100%", borderCollapse: "collapse" }}><PopupForm /></div>
                           <div className="App-table">
                               <table style={{ width: "100%", borderCollapse: "collapse" }} >
-                                  <tr style={{ color: "lightgreen", weight: "italic" }}>
+                            <tr style={{ color: "lightgreen", weight: "italic" }}>
                                       <th>Game</th>
                                       <th>Name</th>
                                       <th>Size</th>
