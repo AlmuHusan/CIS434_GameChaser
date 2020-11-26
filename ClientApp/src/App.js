@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,7 +23,7 @@ class App extends React.Component{
           super(props);
           this.state = {
               loaded: false,
-
+              regions: 'All Region',
 
           };
 
@@ -34,6 +34,7 @@ class App extends React.Component{
       }
 
 
+  handle
   render(){
 
 
@@ -44,18 +45,17 @@ class App extends React.Component{
 
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="/">Game Chasers </Navbar.Brand>
-      <Navbar.Brand><GetRegion/> </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <NavDropdown title="Region" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="3.1">NA</NavDropdown.Item>
+                  <Nav className="mr-auto">
+            <NavDropdown title={this.state.regions} id="collasible-nav-dropdown">
+            <NavDropdown.Item onClick={() => this.setState({ regions: 'NA' })}>NA</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="3.2">SA</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => this.setState({ regions: 'EU' })}>EU</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="3.3">Asia</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => this.setState({ regions: 'Asia' })}>Asia</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="3.4">EU</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => this.setState({ regions: 'All Region' })}>All Region</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Nav>
@@ -71,7 +71,7 @@ class App extends React.Component{
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={() => <Home rgn={this.state.regions} />} />
       </Switch>
 
     </Router>

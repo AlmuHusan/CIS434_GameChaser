@@ -18,6 +18,9 @@ namespace react_asp_template
         [JsonPropertyName("size")]
         public int size { get; set; }
 
+        [JsonPropertyName("region")]
+        public string Region { get; set; }
+
         [JsonPropertyName("time")]
         public DateTime Time { get; set; }
 

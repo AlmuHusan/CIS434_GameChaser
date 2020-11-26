@@ -10,6 +10,7 @@ CREATE TABLE GameSessions (
 );
 
 INSERT INTO GameSessions VALUES
+
 (1,'Mario Sunshine','luigi55',2,'2008-11-11','Test','East Coast'),
 (2,'League of Legends','MikeEagle',5,'2008-11-11','Gold rank or higher only','Asia'),
 (3,'Mario BuhBye','luigi55',3,'2008-11-11','late night casuals','Europe')
