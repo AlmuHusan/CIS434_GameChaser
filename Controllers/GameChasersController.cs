@@ -8,9 +8,8 @@ using react_asp_template.Core;
 
 namespace react_asp_template.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
-    public class GameChasersController : ControllerBase
+    public class GameChasersController : Controller
     {
         GameSessionsDBContext db;
         public GameChasersController(GameSessionsDBContext db)
@@ -20,8 +19,8 @@ namespace react_asp_template.Controllers
         }
 
 
-        [HttpGet]
-        public List<GameSession> Get()
+        [HttpGet("[action]")]
+        public List<GameSession> getTableData()
         {
             var data = new List<GameSession>();
             foreach(var line in db.GameSessions)
@@ -29,6 +28,17 @@ namespace react_asp_template.Controllers
                 data.Add(line);
             }
             return data;
+        }
+
+        [HttpGet("[action]")]
+        public List<Login> getLoginData()
+        {
+            var data2 = new List<Login>();
+            foreach (var line in db.Logins)
+            {
+                data2.Add(line);
+            }
+            return data2;
         }
     }
 }

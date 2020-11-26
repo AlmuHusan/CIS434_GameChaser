@@ -35,7 +35,14 @@ class Home extends React.Component{
               };
               } 
     async componentDidMount() {
-        const response = await fetch('GameChasers');
+        const response = await fetch('GameChasers/getTableData', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+
+        });
         const data = await response.json();
         console.log(data)
         this.setState({ tableInfo: data, loaded: true });
@@ -125,6 +132,7 @@ class Home extends React.Component{
                     
                 </tr>);
                 
+
               console.log(itemList);
               
         }

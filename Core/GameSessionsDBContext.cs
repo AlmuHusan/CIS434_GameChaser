@@ -10,5 +10,6 @@ namespace react_asp_template.Core
     {
         public GameSessionsDBContext(DbContextOptions<GameSessionsDBContext> options) : base(options) { }
         public DbSet<GameSession> GameSessions { get; set; }
+        public DbSet<Login> Logins { get; set; }
     }
 }

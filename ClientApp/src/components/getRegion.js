@@ -11,7 +11,8 @@ import React from 'react';
         const url = "https://geo.ipify.org/api/v1?apiKey=at_gFewbGeplb0gcg0S6HynNZZA5N6gk&ipAddress=";
         const response = await fetch(url);
         const data = await response.json();
-        this.setState({ ip: data.ip, loading: false, timezone: data.location.timezone});
+          this.setState({ ip: data.ip, loading: false, timezone: data.location.timezone });
+          console.log(this.state.data)
       }
 
       render() {
