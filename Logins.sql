@@ -7,6 +7,6 @@ CREATE TABLE Logins (
 );
 
 INSERT INTO Logins VALUES
-(1,'Mario Sunshine','luigi55'),
-(2,'League of Legends','MikeEagle'),
-(3,'Mario BuhBye','luigi55')
+(1,'dan@email.com','password'),
+(2,'husan@gmail.com','gamechasers'),
+(3,'','')
