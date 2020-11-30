@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\husan\\Documents\\GitHub\\CIS434_GameChaser\\GameChasers.csproj": {}
+    "D:\\React\\CIS434_GameChaser\\GameChasers.csproj": {}
   },
   "projects": {
-    "C:\\Users\\husan\\Documents\\GitHub\\CIS434_GameChaser\\GameChasers.csproj": {
+    "D:\\React\\CIS434_GameChaser\\GameChasers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\husan\\Documents\\GitHub\\CIS434_GameChaser\\GameChasers.csproj",
+        "projectUniqueName": "D:\\React\\CIS434_GameChaser\\GameChasers.csproj",
         "projectName": "GameChasers",
-        "projectPath": "C:\\Users\\husan\\Documents\\GitHub\\CIS434_GameChaser\\GameChasers.csproj",
-        "packagesPath": "C:\\Users\\husan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\husan\\Documents\\GitHub\\CIS434_GameChaser\\obj\\",
+        "projectPath": "D:\\React\\CIS434_GameChaser\\GameChasers.csproj",
+        "packagesPath": "C:\\Users\\serey\\.nuget\\packages\\",
+        "outputPath": "D:\\React\\CIS434_GameChaser\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\husan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\serey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -73,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
