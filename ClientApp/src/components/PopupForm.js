@@ -100,6 +100,7 @@ const intV = {
     Size: '',
     Time: '',
     Notes: '',
+    Region:'',
 }
 
 const { GameInput } = {
@@ -137,6 +138,8 @@ export default function PopupForm() {
             temp.Name = fieldValues.Name ? "" : "*Username is required."
         if ('Time' in fieldValues)
             temp.Time = fieldValues.Time ? "" : "*Time is required."
+        if ('Region' in fieldValues)
+            temp.Region = fieldValues.Region ? "" : "*Region is required."
         if ('Size' in fieldValues)
             temp.Size = (/^[0-9\b]+$/).test(fieldValues.Size) ? "" : "*This field must be in number."
         setErrors({
@@ -224,6 +227,14 @@ export default function PopupForm() {
                             value={values.Time}
                             onChange={handleInputChange}
                             error={errors.Time}
+                        />
+                        <div className={classes.div_f}> Game </div>
+                        <Input_f
+                            variant="outlined"
+                            name="Region"
+                            value={values.Region}
+                            onChange={handleInputChange}
+                            error={errors.Regio }
                         />
                         <div className={classes.div_f}> NOTES </div>
                         <Input_f
