@@ -94,12 +94,13 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
 }
 
 
-const intV = {
+var intV = {
     Game: '',
     Name: '',
     Size: '',
     Time: '',
-    Notes: '',
+    Region: '',
+    Summary:''
 }
 
 const { GameInput } = {
@@ -129,6 +130,7 @@ export function getData() {
 
 
 export default function PopupForm() {
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('Game' in fieldValues)
@@ -137,8 +139,16 @@ export default function PopupForm() {
             temp.Name = fieldValues.Name ? "" : "*Username is required."
         if ('Time' in fieldValues)
             temp.Time = fieldValues.Time ? "" : "*Time is required."
+        if ('Region' in fieldValues)
+            temp.Region = fieldValues.Region ? "" : "*Region is required."
         if ('Size' in fieldValues)
             temp.Size = (/^[0-9\b]+$/).test(fieldValues.Size) ? "" : "*This field must be in number."
+        intV.Game = fieldValues.Game
+        intV.Name = fieldValues.Name
+        intV.Time = fieldValues.Time
+        intV.Region = fieldValues.Region
+        intV.Size = fieldValues.Size
+        intV.Summary=fieldValues.Notes    
         setErrors({
             ...temp
         })
@@ -156,12 +166,24 @@ export default function PopupForm() {
     } = useForm(intV, true, validate);
 
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         if (validate()) {
             insertData(values)
             resetForm()
+            const message = await fetch('GameChasers/postTableData', {
+                method: 'POST',
+                body:JSON.stringify(intV),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+
+                }
+
+            });
             handleClose()
+            window.location.reload(false)
+
         }
     }
 
@@ -224,6 +246,14 @@ export default function PopupForm() {
                             value={values.Time}
                             onChange={handleInputChange}
                             error={errors.Time}
+                        />
+                        <div className={classes.div_f}> Region </div>
+                        <Input_f
+                            variant="outlined"
+                            name="Region"
+                            value={values.Region}
+                            onChange={handleInputChange}
+                            error={errors.Region }
                         />
                         <div className={classes.div_f}> NOTES </div>
                         <Input_f
